@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+      display: none;
+  }
+  .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+  }
+  .fill-1 {
+      font-variation-settings: 'FILL' 1;
+  }
+
+  /* Masonry Grid */
+  .masonry-grid {
+      column-count: 1;
+      column-gap: 1.5rem;
+  }
+  @media (min-width: 640px) { .masonry-grid { column-count: 2; } }
+  @media (min-width: 1024px) { .masonry-grid { column-count: 3; } }
+  @media (min-width: 1280px) { .masonry-grid { column-count: 4; } }
+  
+  .masonry-item {
+      break-inside: avoid;
+      margin-bottom: 1.5rem;
+  }
+  
+  .artwork-card:hover img {
+      transform: scale(1.05);
+  }
+}

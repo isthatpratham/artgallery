@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#d37969",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#1f1513",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<title>Artwork Detail - ArtGallery</title>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 transition-colors duration-200">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-primary/10 px-6 md:px-20 py-4 bg-background-light dark:bg-background-dark sticky top-0 z-50">
+<div class="flex items-center gap-4">
+<div class="size-8 text-primary">
+<span class="material-symbols-outlined text-4xl">palette</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-xl font-bold leading-tight tracking-[-0.015em]">ArtGallery</h2>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Gallery</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Artists</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Exhibitions</a>
+</nav>
+<div class="flex gap-3">
+<button class="flex items-center justify-center rounded-xl h-10 w-10 bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined">share</span>
+</button>
+<button class="flex items-center justify-center rounded-xl h-10 w-10 bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+</div>
+</header>
+<main class="flex-1 px-4 md:px-20 py-8 lg:py-12">
+<div class="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
+<div class="flex flex-col gap-4">
+<div class="group relative aspect-[4/5] overflow-hidden rounded-xl bg-primary/5">
+<div class="h-full w-full bg-center bg-no-repeat bg-cover transition-transform duration-500 group-hover:scale-105" data-alt="Vibrant abstract oil painting with warm tones" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDIILzsXwlNGM6LqkxPaaDG-B7oESKz-FFCtgAsjPMag6jHkQGXvoM_ARw5Di5YJTxK3QfkUMF4qoUtvrCT9iW9w9uq5h1OGUfVlIrKEKZ0zqXXyNmErDh1SESq4GAMpgam_5fHRyk6R8AfKu4rOx7kvxENOdOEj8jigBtTZFOBvXl7YX6a8jvi-MIGq6FlmESQVdf-Pl5dOHdWoZTQsYsSsy0A0LTxGK6nVSHW2GcRR58_P_Fg_Qy6hnzBR_47FTJJSnxRNIt2GTc");'>
+</div>
+</div>
+<div class="grid grid-cols-4 gap-4">
+<div class="aspect-square rounded-lg bg-cover bg-center border-2 border-primary" data-alt="Main view of abstract oil painting" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBi0p1YOSs2mhlEp6hddCGNGrQq_uWen90_GFGepJ3MOZl6PasJI5MGFaPgt16UxApFIcKDml1P9pQlxypQpnNdRN-Rojos9wWN2XvM7fS9KEE_FlcFGB9-0hC4ZWYJd4T3dr9icmJdNbVAv_E-YYLQA2je-c1OE4Q_R9v2ZjUEtYqw3jEcWA1O-9d-sm0dyAMDhjVSSn26OsNJ7HSMS8fLEF1CViWtXKf4SaVZ3Db1UvPWWzItVZkIwDtXj6xT4x7xRT8vO2DXPIw");'></div>
+<div class="aspect-square rounded-lg bg-cover bg-center opacity-60 hover:opacity-100 cursor-pointer transition-opacity" data-alt="Close up texture of the canvas" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCCGhdfZXWKIb3XOsXysbxI4NuOMpYrh0PyTe70NWRF_hnvnbjmwqb3EnkW-kVBMrFeF-H0GeaEhLJXeIWW2oK-5o_D_zZPD9inaVncH5Fag3LwLihpzQjjlzGxr8ibqs-ibgJJBygfjRNONiQRVRm08zuXUktgR4uJ8d2rbQSyZ-5Hxch_z2Tt-o1jM1bpiQPgi4Da_bFhqBkqsH57CXNMS6fKv4YrUY6N2UtbxK6cSKud15YKrE0D0fypSvymADstD41pIVIE57c");'></div>
+<div class="aspect-square rounded-lg bg-cover bg-center opacity-60 hover:opacity-100 cursor-pointer transition-opacity" data-alt="Angle view of the framed artwork" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBBnS7O7TI1XX4sAAzB7i4-1_phZltc9jzsXmRKfTUfRgmD-k06omlvUrSXwx8CkbHSjcyUUkLTsclrYaFIXGMQpAq1FiqyxPTSZI7t2hdaa_k2Rd3WmQSNMLuMPR3Zu2-ap9IiIqlohOn74QgPMekQrDadhm-SCXDO14YCrERmGRR236IsgLaBcvWulOOO3zcIKWh6H9PAApYqiiKrxfp_w1mRnL6p08Or9E22PZ0DBdxgG4bdEGRTPJ2SV4TBIewS_1zIWeYtlcU");'></div>
+<div class="aspect-square rounded-lg bg-cover bg-center opacity-60 hover:opacity-100 cursor-pointer transition-opacity" data-alt="Artwork displayed in a living room" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCg4ngz3yqIQZKut6m22bXAnspx6YCB16lI3MOZmvODpU_TwYjp8u1tlaO5Itr5c9fcrUazVvAmVzYLSF6-kcQsD6oI0bHWeY0_uYBrp6baryr-7i_51XRPOmC1fP8oAn4ZfhwtujhWXuF9sT_MCag3Q1BI_jviwKejOUFPPxno3lg8m4dPqvj5YN84Bh8VayX3b24a-WNBUJWB35H5K30WAUmRfmmokKeFP8cNB5wJtA3ptVRD1JwM8UrNIxAD8L6maYhqZZkh-YA");'></div>
+</div>
+</div>
+<div class="flex flex-col">
+<div class="mb-8">
+<div class="flex items-center gap-2 mb-2">
+<span class="px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider bg-primary/20 text-primary">Limited Edition</span>
+<span class="text-slate-500 dark:text-slate-400 text-sm">SKU: AG-2024-ED</span>
+</div>
+<h1 class="text-4xl md:text-5xl font-black text-slate-900 dark:text-slate-100 leading-tight tracking-tight mb-2">Ethereal Dreams</h1>
+<p class="text-xl text-primary font-medium">by Elena Rodriguez</p>
+</div>
+<div class="bg-primary/5 rounded-xl p-6 mb-8 border border-primary/10">
+<h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">info</span>
+                                Artwork Details
+                            </h3>
+<div class="space-y-4">
+<div class="flex justify-between items-center border-b border-primary/10 pb-2">
+<span class="text-slate-500 dark:text-slate-400 font-medium">Product Type</span>
+<span class="text-slate-900 dark:text-slate-100 font-bold">Original Oil on Canvas</span>
+</div>
+<div class="flex justify-between items-center border-b border-primary/10 pb-2">
+<span class="text-slate-500 dark:text-slate-400 font-medium">Portrait Type</span>
+<span class="text-slate-900 dark:text-slate-100 font-bold">Landscape / Rectangle</span>
+</div>
+<div class="flex justify-between items-center border-b border-primary/10 pb-2">
+<span class="text-slate-500 dark:text-slate-400 font-medium">Size</span>
+<span class="text-slate-900 dark:text-slate-100 font-bold">24 x 36 inches</span>
+</div>
+<div class="flex justify-between items-center pt-2">
+<span class="text-slate-500 dark:text-slate-400 font-medium">Price</span>
+<span class="text-3xl font-black text-primary">$1,250.00</span>
+</div>
+</div>
+</div>
+<div class="mb-8">
+<h3 class="text-lg font-bold mb-3">Description</h3>
+<p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                                "Ethereal Dreams" explores the boundary between subconscious thought and visual reality. This piece uses heavy impasto techniques to create a physical depth that mirrors the emotional complexity of the subject matter. Each brushstroke is a deliberate movement capturing a fleeting moment of serenity amidst chaos.
+                            </p>
+</div>
+<div class="flex flex-col sm:flex-row gap-4 mt-auto">
+<button class="flex-1 flex items-center justify-center gap-2 bg-primary text-white font-bold py-4 px-6 rounded-xl hover:bg-opacity-90 transition-all shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined">shopping_cart</span>
+                                Order This Artwork
+                            </button>
+<button class="flex-1 flex items-center justify-center gap-2 bg-[#25D366] text-white font-bold py-4 px-6 rounded-xl hover:bg-opacity-90 transition-all shadow-lg shadow-green-500/20">
+<svg class="w-6 h-6 fill-current" viewbox="0 0 24 24">
+<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.435 5.624 1.436h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"></path>
+</svg>
+                                Contact on WhatsApp
+                            </button>
+</div>
+<div class="mt-8 flex items-center gap-6 p-4 border border-primary/10 rounded-xl">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">local_shipping</span>
+<span class="text-sm font-medium">Free Shipping</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">verified</span>
+<span class="text-sm font-medium">Authenticity Cert.</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">history</span>
+<span class="text-sm font-medium">30-Day Returns</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-20">
+<h3 class="text-2xl font-bold mb-8">More from this artist</h3>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+<div class="group cursor-pointer">
+<div class="aspect-square rounded-xl bg-primary/10 overflow-hidden mb-3">
+<div class="w-full h-full bg-cover bg-center transition-transform group-hover:scale-110" data-alt="Another abstract painting by the same artist" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCu5jyyLDC5rMr1VVgmrH8OmE0xHCc5Q0SaiG7lvi1vu0xks6_gyrcDgTYWZKLpW6oIEnX2KwVEv0jrVAHNxETgXGf5i4_BCnYzLSuWoWwQjBx4NCp39_l6ofcUHtGMf9ULfBHqaqM38_cIBPUYv9RjKaysekC5soTz2ODXemVYt2D_FC-agc72QPYT6O26yTsL03LzKgMQDxmslvQ8MQVZaMcRx5jmLF3B-HAksR-rTV0LyLDJcyTccvHSIQaWiuMxpSnoRbW7fno");'></div>
+</div>
+<h4 class="font-bold text-sm">Silent Whispers</h4>
+<p class="text-primary text-xs font-bold">$850.00</p>
+</div>
+<div class="group cursor-pointer">
+<div class="aspect-square rounded-xl bg-primary/10 overflow-hidden mb-3">
+<div class="w-full h-full bg-cover bg-center transition-transform group-hover:scale-110" data-alt="Blue and gold abstract artwork" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDpwE9blmiDIqsygP1l_50s8zq_gcDdKZFXKWF7CgiVzw80N4gqF7TkqrovPTT9gc75WBUgu4GsJatYPscAlcljhldPymkvJkHXkIp7av7kVRJPcxfa6aPd3sZJprskrbVwYxkA-N_lhD3sIm_1g5z5Zkz64iGL8dbKOuZCp7C4Oy94M7WNZmCoSrrb6uvAvLoHQD9TC3sksCTO1CuGEiWO8CMeMR7Ig-olIHlI8FkX07_ZgqIJbSZCTEumDKa9PTei920Fb1aPXI4");'></div>
+</div>
+<h4 class="font-bold text-sm">Azure Depths</h4>
+<p class="text-primary text-xs font-bold">$920.00</p>
+</div>
+<div class="group cursor-pointer">
+<div class="aspect-square rounded-xl bg-primary/10 overflow-hidden mb-3">
+<div class="w-full h-full bg-cover bg-center transition-transform group-hover:scale-110" data-alt="Modern geometric art piece" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDQWaYEFKvOxJqygQYxbcWv6pD4XU4mJM7NC1J4FwlQ7_SeTIntHRlYP_yOr89gYt4U2R3kBn5oHoE32aU6ZjVfs-EH233cu_Zbz8TONt7Xjeo1HtYl6dZm9JQi7FRsFSNbfryuee0heia8wnoZe2HHxjyayXFIqoKdt8fzJ-4_DapRH1vzYqXL4CAXZbk-cPpJvz-JTHIdZnLYD717IZT8DwzaEXXIpAW8s__J4s0BG8RYODc8slWfhjQk2_5cMMJ6aO9JQDo2nlg");'></div>
+</div>
+<h4 class="font-bold text-sm">Golden Hour</h4>
+<p class="text-primary text-xs font-bold">$1,100.00</p>
+</div>
+<div class="group cursor-pointer">
+<div class="aspect-square rounded-xl bg-primary/10 overflow-hidden mb-3">
+<div class="w-full h-full bg-cover bg-center transition-transform group-hover:scale-110" data-alt="Colorful abstract floral painting" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC8XwtKa2H5BWY8Jc_UW2NIwGKZS9BFh4I1iLl49zyOWZvpq7XcDVlW8PuiafI4qQShdebhlxiq9pOWoVDPMhxo8GIGVNn-OXUgP3MXg-Aieh-7GDIMbKZM5IaUzLyiIqDboQPZBC_00ONPBUPaMqwqCpNuKV4OKf1ed_d5ezp4Mpi4nfaxNtfnEuX5AZN0oohA4dU5cXSbChUuWTuuMGN3QL3x_Ea7JLUdlis8GZNEHJFzW2YFBrDRJ1nQGD_6NwUnSgbJxj2G1r4");'></div>
+</div>
+<h4 class="font-bold text-sm">Morning Dew</h4>
+<p class="text-primary text-xs font-bold">$780.00</p>
+</div>
+</div>
+</div>
+</main>
+<footer class="border-t border-primary/10 py-12 px-6 md:px-20 bg-background-light dark:bg-background-dark">
+<div class="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+<div class="col-span-1 md:col-span-1">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary text-3xl">palette</span>
+<span class="text-xl font-bold">ArtGallery</span>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400">Curating the world's finest contemporary art for your living space.</p>
+</div>
+<div>
+<h4 class="font-bold mb-4">Shop</h4>
+<ul class="space-y-2 text-sm text-slate-500 dark:text-slate-400">
+<li><a class="hover:text-primary" href="#">New Arrivals</a></li>
+<li><a class="hover:text-primary" href="#">Limited Editions</a></li>
+<li><a class="hover:text-primary" href="#">Originals</a></li>
+<li><a class="hover:text-primary" href="#">Prints</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold mb-4">About</h4>
+<ul class="space-y-2 text-sm text-slate-500 dark:text-slate-400">
+<li><a class="hover:text-primary" href="#">Our Mission</a></li>
+<li><a class="hover:text-primary" href="#">Sustainability</a></li>
+<li><a class="hover:text-primary" href="#">Careers</a></li>
+<li><a class="hover:text-primary" href="#">Journal</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold mb-4">Newsletter</h4>
+<p class="text-sm text-slate-500 dark:text-slate-400 mb-4">Subscribe for early access to new collections.</p>
+<div class="flex gap-2">
+<input class="flex-1 bg-white dark:bg-slate-800 border-none rounded-lg text-sm px-4 focus:ring-2 focus:ring-primary" placeholder="Email address" type="email"/>
+<button class="bg-primary text-white p-2 rounded-lg hover:bg-opacity-90">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+</div>
+<div class="mt-12 pt-8 border-t border-primary/10 text-center text-xs text-slate-400">
+                    © 2024 ArtGallery. All rights reserved.
+                </div>
+</footer>
+</div>
+</div>
+</body></html>

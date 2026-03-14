@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ArtGallery | Premium Collection</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#d37969",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#1f1513",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .masonry-grid {
+            column-count: 1;
+            column-gap: 1.5rem;
+        }
+        @media (min-width: 640px) { .masonry-grid { column-count: 2; } }
+        @media (min-width: 1024px) { .masonry-grid { column-count: 3; } }
+        @media (min-width: 1280px) { .masonry-grid { column-count: 4; } }
+        
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 1.5rem;
+        }
+        
+        .artwork-card:hover img {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<header class="sticky top-0 z-50 w-full border-b border-primary/10 bg-background-light/80 backdrop-blur-md dark:bg-background-dark/80 px-6 lg:px-20 py-4">
+<div class="mx-auto flex max-w-7xl items-center justify-between gap-8">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-primary">
+<span class="material-symbols-outlined text-3xl">palette</span>
+<h1 class="text-xl font-bold tracking-tight text-slate-900 dark:text-slate-100">ArtGallery</h1>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-sm font-semibold text-primary" href="#">Gallery</a>
+<a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors dark:text-slate-400" href="#">Artists</a>
+<a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors dark:text-slate-400" href="#">Exhibitions</a>
+</nav>
+</div>
+<div class="flex flex-1 justify-end items-center gap-4 lg:gap-6">
+<div class="relative hidden sm:block w-full max-w-xs">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+<input class="w-full rounded-full border-none bg-primary/5 py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/20 dark:bg-primary/10" placeholder="Search artworks..." type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<button class="flex h-10 w-10 items-center justify-center rounded-full bg-primary/5 text-slate-700 hover:bg-primary hover:text-white transition-all dark:bg-primary/10 dark:text-slate-300">
+<span class="material-symbols-outlined text-xl">shopping_bag</span>
+</button>
+<button class="flex h-10 w-10 items-center justify-center rounded-full bg-primary/5 text-slate-700 hover:bg-primary hover:text-white transition-all dark:bg-primary/10 dark:text-slate-300">
+<span class="material-symbols-outlined text-xl">person</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<main class="mx-auto w-full max-w-7xl px-6 lg:px-20 py-12">
+<section class="mb-12">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+<div class="max-w-2xl">
+<h2 class="text-4xl md:text-5xl font-black text-slate-900 dark:text-white leading-tight">Art Collection</h2>
+<p class="mt-4 text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
+                            Discover a curated selection of contemporary masterpieces, from soul-stirring portraits to delicate handmade keepsakes.
+                        </p>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-2 pb-4">
+<button class="rounded-full bg-primary px-6 py-2 text-sm font-semibold text-white shadow-lg shadow-primary/20">All Works</button>
+<button class="rounded-full bg-primary/5 border border-primary/10 px-6 py-2 text-sm font-medium text-slate-700 hover:bg-primary/10 transition-colors dark:text-slate-300">Portraits</button>
+<button class="rounded-full bg-primary/5 border border-primary/10 px-6 py-2 text-sm font-medium text-slate-700 hover:bg-primary/10 transition-colors dark:text-slate-300">Keychains</button>
+<button class="rounded-full bg-primary/5 border border-primary/10 px-6 py-2 text-sm font-medium text-slate-700 hover:bg-primary/10 transition-colors dark:text-slate-300">Solo Portraits</button>
+<button class="rounded-full bg-primary/5 border border-primary/10 px-6 py-2 text-sm font-medium text-slate-700 hover:bg-primary/10 transition-colors dark:text-slate-300">Couple Portraits</button>
+<button class="rounded-full bg-primary/5 border border-primary/10 px-6 py-2 text-sm font-medium text-slate-700 hover:bg-primary/10 transition-colors dark:text-slate-300">Family Portraits</button>
+</div>
+</section>
+<section class="masonry-grid">
+<div class="masonry-item artwork-card group cursor-pointer overflow-hidden rounded-xl bg-white dark:bg-slate-900 transition-all duration-500 hover:shadow-2xl">
+<div class="relative overflow-hidden aspect-[4/5]">
+<img class="h-full w-full object-cover transition-transform duration-700" data-alt="Introspective oil painting portrait of a woman" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2TD8jgzPC2woXY_10lc2hpgs2XaGE4sNZwJJmqZrbhEGcFsx9xS0km9cGRN5anikCe2Br2f2FXd_5bu0Yx8IVGvAC6EriJbtBsPYdMzip_wtaQoVZqjKRliBwvUTB53qvjAZz8CWCG2hWs8ZEwn3rxOaAUvbPblApsXcytwyGsmsGBjaAfqri5tKhNaaTnfHGOoYJTCDvqeRFUlzKCdxiF_XseWL3s8a1PnU4WCiRe7oHA2Vm5yQTGKhF4vIHTP2yvtg-nDlyjNA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+<p class="text-white text-sm font-medium mb-1">Portraits</p>
+<h3 class="text-white text-xl font-bold">The Silent Gaze</h3>
+</div>
+</div>
+</div>
+<div class="masonry-item artwork-card group cursor-pointer overflow-hidden rounded-xl bg-white dark:bg-slate-900 transition-all duration-500 hover:shadow-2xl">
+<div class="relative overflow-hidden aspect-[1/1]">
+<img class="h-full w-full object-cover transition-transform duration-700" data-alt="Handcrafted custom keychain with miniature art" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArMA91MuuXJNzLzyWpWWV36LBi8-wkSFmL3j2TpHpvQQVAj5u-sb-zudOoduOp2bCYlER09sHZDhfDgN5HnPBburSKEwnaZIFkGXjl3gW1fytwtWCLz_7XnljMnczjK2XjyNlUzMOSxgL6gzjgaETtFbQaRK6q2NjOMyTfcWAMdQ2nk9Gd8iPY6gLaMY4GmNnvDaTR2tSqVoIOgXeLhNiIhTb5cT3uDN3varjhEcLkYY40DuUaFjDrkm4ld52XWvSVFX8HRH690_M"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+<p class="text-white text-sm font-medium mb-1">Keychains</p>
+<h3 class="text-white text-xl font-bold">Oceanic Tides</h3>
+</div>
+</div>
+</div>
+<div class="masonry-item artwork-card group cursor-pointer overflow-hidden rounded-xl bg-white dark:bg-slate-900 transition-all duration-500 hover:shadow-2xl">
+<div class="relative overflow-hidden aspect-[3/4]">
+<img class="h-full w-full object-cover transition-transform duration-700" data-alt="Vibrant abstract oil painting with texture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2vg9qFA-Rh7Bl3xixlh0E4tdazvNGyWsFxA9FSvFpvpS6F1VQHlSj2YNv3Y0UR08jD6TEY1EM_-Q5im2cbUXNdLRs8_h-qyTZIoLra3w9CET9EqO_bjK643CeTELEksLF6_pVD1TCEUY29AiHPkuPV1RSAaX56qZ1I-ACET5_bwujgqVqeiFatn3uLYnDbAdc-Mj2lYWS77_D4BddAkxFERg5rWk64sI_ii-7_9GmlTI7JuNm4GPSLvywqsfNbZOOPsSfglVRvDc"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+<p class="text-white text-sm font-medium mb-1">Solo Portraits</p>
+<h3 class="text-white text-xl font-bold">Midnight Reverie</h3>
+</div>
+</div>
+</div>
+<div class="masonry-item artwork-card group cursor-pointer overflow-hidden rounded-xl bg-white dark:bg-slate-900 transition-all duration-500 hover:shadow-2xl">
+<div class="relative overflow-hidden aspect-[4/5]">
+<img class="h-full w-full object-cover transition-transform duration-700" data-alt="Classical style portrait of a young couple" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1KantWOG9z390myvPoyw2fiyAOV5VqKlYRHEhJNNGvbKcoozIw-oRkbSbqBtc8Nr3cxkjhR8ClujkMeAMcfMvQb-v9PmVi9iEF4FJGx_TuAkNsfILj5E0VzK4AVY9XM0STknr2OELNTGg4RBzNpHlDIn66yDqo0Q8snmkmSjXcx1MV1Ma0d3NMvmIPEdrQg5PPepBQ-PoufkTcZMBn4TpklCoIUtapMhBiucKmoEQA8nbPzMIGiGttXd9IyvSsxI8yWV6nQQ1Plk"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+<p class="text-white text-sm font-medium mb-1">Couple Portraits</p>
+<h3 class="text-white text-xl font-bold">Eternal Bond</h3>
+</div>
+</div>
+</div>
+<div class="masonry-item artwork-card group cursor-pointer overflow-hidden rounded-xl bg-white dark:bg-slate-900 transition-all duration-500 hover:shadow-2xl">
+<div class="relative overflow-hidden aspect-[3/2]">
+<img class="h-full w-full object-cover transition-transform duration-700" data-alt="Cozy reading room with art on walls" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDlDJmtb1YauuxsD3PB8_tsVb-USGXQCTFLGjQuXvgxh3MjGEEiJmbztpj5A6LpwxIrRBlkPvK8Kdl8jZXbJ3m7TuSKF3kgxGJRhgkPLdPZcODhn3c_UiZUGdk-iGmd1i6xIR325kgH7rglnvHuM2u1P0SzuAFFUN3_NuU_Af5IDjqcNoR1iAXOc8Lo2dub4fEtZkiOQCECSfWgXttMdBZ8JykOd29kU5WMWG8S2qq9aRVK2SlGe76kgNfUziAZDQl056qw860vAM"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+<p class="text-white text-sm font-medium mb-1">Gallery Space</p>
+<h3 class="text-white text-xl font-bold">The Library Corner</h3>
+</div>
+</div>
+</div>
+<div class="masonry-item artwork-card group cursor-pointer overflow-hidden rounded-xl bg-white dark:bg-slate-900 transition-all duration-500 hover:shadow-2xl">
+<div class="relative overflow-hidden aspect-[1/1]">
+<img class="h-full w-full object-cover transition-transform duration-700" data-alt="Family gathered together in a stylized portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAzBrrrTrsCPxi7eefFQkphklfjHtN9VWyFL01DyZeGUFoXmAuH47uD8lV6H88bBICqM74wdzPZN62EkDpHQ8Pc5yRtO8JYlsD3md8NUJeVAUAd6f1TYraVNiVTARmG3iwqdt-qFlYx4XcjxZ0iaxwrc94F3qDiwgHbAeS4bhmB5uEC6jM_foNuTs7gQHIKHOwnHxUudTigOGVLDGGMaLmElLtHwu1t_RNOf1xQDweWKrhHbgGqviPEpOJCZYW-AZTGM-UEnyLX_Y"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+<p class="text-white text-sm font-medium mb-1">Family Portraits</p>
+<h3 class="text-white text-xl font-bold">Generations</h3>
+</div>
+</div>
+</div>
+<div class="masonry-item artwork-card group cursor-pointer overflow-hidden rounded-xl bg-white dark:bg-slate-900 transition-all duration-500 hover:shadow-2xl">
+<div class="relative overflow-hidden aspect-[4/5]">
+<img class="h-full w-full object-cover transition-transform duration-700" data-alt="Minimalist wood keychain with etched design" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTg5SPogad_iSZ05DdibD2gEehkTCwJgIEAW5tuEnsJwStxEAaVfaLxaIFaKsmkYsBB36oR4QfIfZbH7W5CHrDLivW3dW4SSQcxHhxdrbanq3sel-AE8de40fiPaDKmGXQHrvXYGvWYLd0h5zdGY8Xy8YFHdjX8n5CVrR7kw0XZa_8rxzY2iriK8UWzzVRMxeZPXTuhwWqMvvyYB__mhetSzAKEfttpbEQ_8p8BEJi-8d2GgQM0TzHSf7v-iBpyB3uLNlw5ekdqNw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+<p class="text-white text-sm font-medium mb-1">Keychains</p>
+<h3 class="text-white text-xl font-bold">Mountain Peak</h3>
+</div>
+</div>
+</div>
+<div class="masonry-item artwork-card group cursor-pointer overflow-hidden rounded-xl bg-white dark:bg-slate-900 transition-all duration-500 hover:shadow-2xl">
+<div class="relative overflow-hidden aspect-[3/4]">
+<img class="h-full w-full object-cover transition-transform duration-700" data-alt="Expressive solo portrait using bold colors" src="https://lh3.googleusercontent.com/aida-public/AB6AXuASfkON2NHLDi3M2XVzNmfqmofSHnwmXQf9qUSj2seF-fxC8whWcP7aU4vgYJAc2xd6x0IK0-5Ka2ckxSOyUs9T7Xp3-VlXenaR4Fkfak3e4XXo7mVTfLPTt_uSXSFlmah8ZKnLs0J5D7oGB4wiYJzOMgLrvwy4serOv9amRirlyjosZgsrgqgfsmFXHTxdKIRAMP5hMTWOwoSe1yRy2DI-6ULkhE6bOznR_esAzrlNlX_bMPHH2UdIrW7vC3mcBTyAdkTOxKomZcM"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+<p class="text-white text-sm font-medium mb-1">Solo Portraits</p>
+<h3 class="text-white text-xl font-bold">Abstract Soul</h3>
+</div>
+</div>
+</div>
+</section>
+<div class="mt-20 border-t border-primary/10 pt-12 text-center">
+<p class="text-slate-500 dark:text-slate-400 mb-6">Can't find what you're looking for?</p>
+<button class="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-4 text-white font-bold transition-transform hover:scale-105 active:scale-95 shadow-xl shadow-primary/20">
+                    Request Custom Commission
+                    <span class="material-symbols-outlined">auto_awesome</span>
+</button>
+</div>
+</main>
+<footer class="mt-auto border-t border-primary/10 bg-white/50 dark:bg-slate-950/50 py-12">
+<div class="mx-auto max-w-7xl px-6 lg:px-20 grid grid-cols-1 md:grid-cols-4 gap-12">
+<div class="col-span-1 md:col-span-2">
+<div class="flex items-center gap-3 text-primary mb-6">
+<span class="material-symbols-outlined text-2xl">palette</span>
+<h2 class="text-lg font-bold tracking-tight text-slate-900 dark:text-slate-100">ArtGallery</h2>
+</div>
+<p class="text-slate-600 dark:text-slate-400 max-w-sm mb-6">
+                        Preserving moments through exquisite craftsmanship and artistic expression. Every piece tells a story worth keeping.
+                    </p>
+<div class="flex gap-4">
+<a class="h-10 w-10 flex items-center justify-center rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">public</span>
+</a>
+<a class="h-10 w-10 flex items-center justify-center rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">alternate_email</span>
+</a>
+</div>
+</div>
+<div>
+<h3 class="font-bold text-slate-900 dark:text-white mb-6">Collection</h3>
+<ul class="space-y-4 text-sm text-slate-600 dark:text-slate-400">
+<li><a class="hover:text-primary transition-colors" href="#">New Arrivals</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Best Sellers</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Limited Editions</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Custom Orders</a></li>
+</ul>
+</div>
+<div>
+<h3 class="font-bold text-slate-900 dark:text-white mb-6">Company</h3>
+<ul class="space-y-4 text-sm text-slate-600 dark:text-slate-400">
+<li><a class="hover:text-primary transition-colors" href="#">Our Story</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Artists</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Terms of Service</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Contact</a></li>
+</ul>
+</div>
+</div>
+<div class="mx-auto max-w-7xl px-6 lg:px-20 mt-12 pt-8 border-t border-primary/5 text-center text-xs text-slate-400">
+                © 2024 ArtGallery. All rights reserved.
+            </div>
+</footer>
+</div>
+</body></html>
