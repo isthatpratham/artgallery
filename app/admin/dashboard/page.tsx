@@ -1,11 +1,19 @@
 'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { supabase } from '@/lib/supabaseClient';
 import { AnimatedImage as Image } from '@/components/ui/AnimatedImage';
 import { Dropdown } from '../../../components/ui/Dropdown';
 
 export default function AdminDashboard() {
+    const router = useRouter();
     const [filter, setFilter] = useState('All Orders');
+
+    const handleLogout = async () => {
+        await supabase.auth.signOut();
+        router.push('/admin/login');
+    };
     return (
         <div className="flex h-screen overflow-hidden bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
             {/* Sidebar */}
@@ -50,14 +58,23 @@ export default function AdminDashboard() {
                 </nav>
 
                 <div className="p-4 border-t border-primary/10">
-                    <div className="flex items-center gap-3 p-2 rounded-lg bg-primary/5">
-                        <div className="size-8 rounded-full bg-primary/20 flex items-center justify-center text-primary overflow-hidden">
-                            <span className="material-symbols-outlined text-sm">person</span>
+                    <div className="flex items-center justify-between p-2 rounded-lg bg-primary/5">
+                        <div className="flex items-center gap-3 overflow-hidden">
+                            <div className="size-8 rounded-full bg-primary/20 flex items-center justify-center text-primary shrink-0">
+                                <span className="material-symbols-outlined text-sm">person</span>
+                            </div>
+                            <div className="flex-1 min-w-0">
+                                <p className="text-xs font-bold truncate">Admin User</p>
+                                <p className="text-[10px] text-slate-500 truncate">admin@artgallery.com</p>
+                            </div>
                         </div>
-                        <div className="flex-1 min-w-0">
-                            <p className="text-xs font-bold truncate">Admin User</p>
-                            <p className="text-[10px] text-slate-500 truncate">admin@artgallery.com</p>
-                        </div>
+                        <button
+                            onClick={handleLogout}
+                            className="p-1.5 hover:bg-red-50 dark:hover:bg-red-900/20 text-slate-400 hover:text-red-500 rounded-lg transition-all tooltip-trigger relative group"
+                            title="Sign Out"
+                        >
+                            <span className="material-symbols-outlined text-xl">logout</span>
+                        </button>
                     </div>
                 </div>
             </aside>
