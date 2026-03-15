@@ -14,14 +14,7 @@ export default function About() {
                     <div className="relative group">
                         <div className="absolute -inset-1 bg-gradient-to-tr from-primary to-orange-200 rounded-full blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
                         <div className="relative size-48 md:size-64 rounded-full border-4 border-white shadow-xl overflow-hidden">
-                            <Image
-                                src="/images/studio/studio-1.png"
-                                alt="Sudarshana Sharma"
-                                fill
-                                priority
-                                sizes="(max-width: 768px) 192px, 256px"
-                                className="object-cover"
-                            />
+                            <Image src="/images/studio/studio-1.png" alt="Sudarshana Sharma" fill className="object-cover" />
                         </div>
                     </div>
                     <div className="mt-8 text-center max-w-2xl">
@@ -54,7 +47,6 @@ export default function About() {
                                     alt="Abstract painting with warm earth tones"
                                     className="object-cover"
                                     fill
-                                    sizes="(max-width: 768px) 100vw, 50vw"
                                     src="/images/studio/studio-11.jpg"
                                 />
                             </div>
@@ -74,7 +66,7 @@ export default function About() {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         <div className="group">
                             <div className="aspect-[3/4] rounded-xl overflow-hidden mb-4 relative">
-                                <Image className="object-cover transition-transform duration-500 group-hover:scale-110" src="/images/studio/studio-2.webp" alt="Color Alchemy" fill sizes="(max-width: 768px) 100vw, 33vw" />
+                                <Image className="object-cover transition-transform duration-500 group-hover:scale-110" src="/images/studio/studio-2.webp" alt="Color Alchemy" fill />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
                                     <p className="text-white text-sm">Step 1: Color Alchemy</p>
                                 </div>
@@ -84,7 +76,7 @@ export default function About() {
                         </div>
                         <div className="group">
                             <div className="aspect-[3/4] rounded-xl overflow-hidden mb-4 relative">
-                                <Image className="object-cover transition-transform duration-500 group-hover:scale-110" src="/images/studio/studio-3.jpg" alt="Mark Making" fill sizes="(max-width: 768px) 100vw, 33vw" />
+                                <Image className="object-cover transition-transform duration-500 group-hover:scale-110" src="/images/studio/studio-3.jpg" alt="Mark Making" fill />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
                                     <p className="text-white text-sm">Step 2: Mark Making</p>
                                 </div>
@@ -94,7 +86,7 @@ export default function About() {
                         </div>
                         <div className="group">
                             <div className="aspect-[3/4] rounded-xl overflow-hidden mb-4 relative">
-                                <Image className="object-cover transition-transform duration-500 group-hover:scale-110" src="/images/studio/studio-4.webp" alt="Final Resonance" fill sizes="(max-width: 768px) 100vw, 33vw" />
+                                <Image className="object-cover transition-transform duration-500 group-hover:scale-110" src="/images/studio/studio-4.webp" alt="Final Resonance" fill />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
                                     <p className="text-white text-sm">Step 3: Final Resonance</p>
                                 </div>
@@ -132,18 +124,18 @@ export default function About() {
                             <div className="md:w-1/2 grid grid-cols-2 gap-4">
                                 <div className="space-y-4">
                                     <div className="rounded-xl overflow-hidden aspect-square relative">
-                                        <Image className="object-cover" src="/images/studio/studio-5.webp" alt="Studio 1" fill sizes="(max-width: 768px) 50vw, 25vw" />
+                                        <Image className="object-cover" src="/images/studio/studio-5.webp" alt="Studio 1" fill />
                                     </div>
                                     <div className="rounded-xl overflow-hidden aspect-[4/5] relative">
-                                        <Image className="object-cover" src="/images/studio/studio-6.jpg" alt="Studio 2" fill sizes="(max-width: 768px) 50vw, 25vw" />
+                                        <Image className="object-cover" src="/images/studio/studio-6.jpg" alt="Studio 2" fill />
                                     </div>
                                 </div>
                                 <div className="space-y-4 pt-8">
                                     <div className="rounded-xl overflow-hidden aspect-[4/5] relative">
-                                        <Image className="object-cover" src="/images/studio/studio-7.webp" alt="Studio 3" fill sizes="(max-width: 768px) 50vw, 25vw" />
+                                        <Image className="object-cover" src="/images/studio/studio-7.webp" alt="Studio 3" fill />
                                     </div>
                                     <div className="rounded-xl overflow-hidden aspect-square relative">
-                                        <Image className="object-cover" src="/images/studio/studio-8.webp" alt="Studio 4" fill sizes="(max-width: 768px) 50vw, 25vw" />
+                                        <Image className="object-cover" src="/images/studio/studio-8.webp" alt="Studio 4" fill />
                                     </div>
                                 </div>
                             </div>

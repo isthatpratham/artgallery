@@ -64,8 +64,6 @@ export default function Home() {
                                     src="/images/hero/hero-11.jpg"
                                     alt="Turn Your Memories Into Hand-Painted Art"
                                     fill
-                                    priority
-                                    sizes="(max-width: 1024px) 100vw, 50vw"
                                     className="object-cover"
                                 />
                             </motion.div>
@@ -110,13 +108,7 @@ export default function Home() {
                                     className="min-w-[300px] snap-start bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm cursor-pointer group"
                                 >
                                     <div className="relative aspect-[3/4] rounded-lg mb-4 overflow-hidden">
-                                        <Image
-                                            src={item.src}
-                                            alt={item.title}
-                                            fill
-                                            sizes="(max-width: 768px) 300px, 400px"
-                                            className="object-cover transition-transform duration-700 group-hover:scale-105"
-                                        />
+                                        <Image src={item.src} alt={item.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
                                     </div>
                                     <h3 className="font-bold">{item.title}</h3>
                                     <p className="text-sm text-slate-500">Hand-crafted selection</p>
