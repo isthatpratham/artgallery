@@ -1,10 +1,11 @@
 'use client';
 import React, { useRef } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import { AnimatedImage as Image } from '@/components/ui/AnimatedImage';
 import { Navbar } from '../components/layout/Navbar';
 import { Footer } from '../components/layout/Footer';
 import { Button } from '../components/ui/Button';
+import { motion } from 'framer-motion';
 
 export default function Home() {
     const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -27,7 +28,12 @@ export default function Home() {
                 <section className="max-w-7xl mx-auto px-6 md:px-20 py-12 md:py-24">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                         <div className="flex flex-col gap-8">
-                            <div className="space-y-4">
+                            <motion.div
+                                className="space-y-4"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.5, ease: "easeInOut" }}
+                            >
                                 <span className="text-primary font-semibold tracking-wider uppercase text-sm">Bespoke Boutique Art</span>
                                 <h1 className="text-5xl md:text-7xl font-black leading-tight tracking-tight text-slate-900 dark:text-slate-100">
                                     Turn Your Memories Into <span className="text-primary">Hand-Painted</span> Art
@@ -35,28 +41,44 @@ export default function Home() {
                                 <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed max-w-xl">
                                     Experience the magic of bespoke hand-painted portraits and custom accessories crafted by master artists. Every brushstroke tells your story.
                                 </p>
-                            </div>
-                            <div className="flex flex-wrap gap-4">
+                            </motion.div>
+                            <motion.div
+                                className="flex flex-wrap gap-4"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.5, ease: "easeInOut", delay: 0.2 }}
+                            >
                                 <Link href="/order"><Button variant="primary" icon="arrow_forward">Order Your Custom Art</Button></Link>
                                 <Link href="/gallery"><Button variant="outline">Explore Gallery</Button></Link>
-                            </div>
+                            </motion.div>
                         </div>
                         <div className="relative group">
                             <div className="absolute -inset-4 bg-primary/20 rounded-xl blur-2xl group-hover:bg-primary/30 transition-all"></div>
-                            <div className="relative aspect-square rounded-xl border-4 border-white dark:border-slate-800 shadow-2xl overflow-hidden">
+                            <motion.div
+                                className="relative aspect-square rounded-xl border-4 border-white dark:border-slate-800 shadow-2xl overflow-hidden"
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ duration: 0.6, ease: "easeInOut" }}
+                            >
                                 <Image
                                     src="/images/hero/hero-11.jpg"
                                     alt="Turn Your Memories Into Hand-Painted Art"
                                     fill
                                     className="object-cover"
                                 />
-                            </div>
+                            </motion.div>
                         </div>
                     </div>
                 </section>
 
                 {/* Featured Artworks Carousel */}
-                <section className="bg-primary/5 py-20">
+                <motion.section
+                    className="bg-primary/5 py-20"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.5, ease: "easeInOut" }}
+                >
                     <div className="max-w-7xl mx-auto px-6 md:px-20">
                         <div className="flex justify-between items-end mb-10">
                             <div>
@@ -79,27 +101,42 @@ export default function Home() {
                                 { title: 'Nature Miniatures', src: '/images/gallery/gallery-4.jpg' },
                                 { title: 'Anniversary Specials', src: '/images/portraits/portraits-3.webp' }
                             ].map((item, i) => (
-                                <div key={i} className="min-w-[300px] snap-start bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm">
+                                <motion.div
+                                    key={i}
+                                    whileHover={{ scale: 1.03 }}
+                                    transition={{ duration: 0.25, ease: "easeInOut" }}
+                                    className="min-w-[300px] snap-start bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm cursor-pointer group"
+                                >
                                     <div className="relative aspect-[3/4] rounded-lg mb-4 overflow-hidden">
-                                        <Image src={item.src} alt={item.title} fill className="object-cover" />
+                                        <Image src={item.src} alt={item.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
                                     </div>
                                     <h3 className="font-bold">{item.title}</h3>
                                     <p className="text-sm text-slate-500">Hand-crafted selection</p>
-                                </div>
+                                </motion.div>
                             ))}
                         </div>
                     </div>
-                </section>
+                </motion.section>
 
                 {/* Portrait Sizes & Pricing */}
-                <section className="max-w-7xl mx-auto px-6 md:px-20 py-20">
+                <motion.section
+                    className="max-w-7xl mx-auto px-6 md:px-20 py-20"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.5, ease: "easeInOut" }}
+                >
                     <div className="text-center mb-16">
                         <h2 className="text-4xl font-black mb-4">Available Portrait Sizes</h2>
                         <p className="text-slate-500 max-w-2xl mx-auto">Choose the perfect canvas size for your space. All portraits are hand-painted using premium oil or acrylic paints.</p>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         {/* Standard Pricing Card */}
-                        <div className="border border-primary/10 p-8 rounded-xl flex flex-col items-center text-center hover:shadow-xl transition-shadow bg-white dark:bg-slate-800">
+                        <motion.div
+                            whileHover={{ scale: 1.03 }}
+                            transition={{ duration: 0.25, ease: "easeInOut" }}
+                            className="border border-primary/10 p-8 rounded-xl flex flex-col items-center text-center hover:shadow-xl transition-shadow bg-white dark:bg-slate-800"
+                        >
                             <span className="material-symbols-outlined text-primary text-5xl mb-4">person</span>
                             <h3 className="text-xl font-bold mb-2">4x4 Solo</h3>
                             <p className="text-slate-500 mb-6">Perfect for single face detail portraits</p>
@@ -109,9 +146,13 @@ export default function Home() {
                                 <li className="flex items-center gap-2"><span className="material-symbols-outlined text-green-500 text-sm">check_circle</span> Premium canvas paper</li>
                             </ul>
                             <Link href="/order" className="w-full block"><Button variant="outline" className="w-full">Select Size</Button></Link>
-                        </div>
+                        </motion.div>
                         {/* Popular Pricing Card */}
-                        <div className="border-2 border-primary p-8 rounded-xl flex flex-col items-center text-center shadow-2xl bg-white dark:bg-slate-800 relative">
+                        <motion.div
+                            whileHover={{ scale: 1.03 }}
+                            transition={{ duration: 0.25, ease: "easeInOut" }}
+                            className="border-2 border-primary p-8 rounded-xl flex flex-col items-center text-center shadow-2xl bg-white dark:bg-slate-800 relative group"
+                        >
                             <div className="absolute -top-4 bg-primary text-white px-4 py-1 rounded-full text-sm font-bold">Most Popular</div>
                             <span className="material-symbols-outlined text-primary text-5xl mb-4">group</span>
                             <h3 className="text-xl font-bold mb-2">4x6 Couple</h3>
@@ -122,9 +163,13 @@ export default function Home() {
                                 <li className="flex items-center gap-2"><span className="material-symbols-outlined text-green-500 text-sm">check_circle</span> Stretched wooden frame</li>
                             </ul>
                             <Link href="/order" className="w-full block"><Button variant="primary" className="w-full h-14">Select Size</Button></Link>
-                        </div>
+                        </motion.div>
                         {/* Large Pricing Card */}
-                        <div className="border border-primary/10 p-8 rounded-xl flex flex-col items-center text-center hover:shadow-xl transition-shadow bg-white dark:bg-slate-800">
+                        <motion.div
+                            whileHover={{ scale: 1.03 }}
+                            transition={{ duration: 0.25, ease: "easeInOut" }}
+                            className="border border-primary/10 p-8 rounded-xl flex flex-col items-center text-center hover:shadow-xl transition-shadow bg-white dark:bg-slate-800"
+                        >
                             <span className="material-symbols-outlined text-primary text-5xl mb-4">family_restroom</span>
                             <h3 className="text-xl font-bold mb-2">6x6 Family</h3>
                             <p className="text-slate-500 mb-6">Capture the whole family in one frame</p>
@@ -134,9 +179,9 @@ export default function Home() {
                                 <li className="flex items-center gap-2"><span className="material-symbols-outlined text-green-500 text-sm">check_circle</span> Large canvas frame</li>
                             </ul>
                             <Link href="/order" className="w-full block"><Button variant="outline" className="w-full">Select Size</Button></Link>
-                        </div>
+                        </motion.div>
                     </div>
-                </section>
+                </motion.section>
 
             </main>
             <Footer />

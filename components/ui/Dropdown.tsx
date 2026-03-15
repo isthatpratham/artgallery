@@ -1,5 +1,6 @@
 'use client';
 import React, { useState, useRef, useEffect, KeyboardEvent } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export interface DropdownOption {
     label: string;
@@ -81,29 +82,36 @@ export function Dropdown({ options, value, onChange, placeholder = 'Select...', 
                 </span>
             </button>
 
-            <div
-                className={`absolute z-50 mt-1 w-full overflow-hidden rounded-lg border border-[#EAEAEA] dark:border-slate-700 bg-white dark:bg-slate-800 shadow-md transition-all duration-200 ease-in-out origin-top ${isOpen ? 'scale-y-100 opacity-100' : 'scale-y-0 opacity-0 pointer-events-none'
-                    }`}
-                role="listbox"
-            >
-                <ul className="max-h-60 overflow-auto py-1 outline-none text-sm">
-                    {options.map((option, index) => (
-                        <li
-                            key={option.value}
-                            role="option"
-                            aria-selected={option.value === value}
-                            onClick={() => handleSelect(option.value)}
-                            onMouseEnter={() => setFocusedIndex(index)}
-                            className={`cursor-pointer px-4 py-2 transition-colors ${focusedIndex === index
-                                    ? 'bg-[#F7F4F1] dark:bg-slate-700'
-                                    : 'hover:bg-[#F7F4F1] dark:hover:bg-slate-700'
-                                } ${option.value === value ? 'font-bold text-primary dark:text-primary' : 'text-slate-700 dark:text-slate-200'}`}
-                        >
-                            {option.label}
-                        </li>
-                    ))}
-                </ul>
-            </div>
+            <AnimatePresence>
+                {isOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.95 }}
+                        transition={{ duration: 0.2, ease: 'easeInOut' }}
+                        className="absolute z-50 mt-1 w-full overflow-hidden rounded-lg border border-[#EAEAEA] dark:border-slate-700 bg-white dark:bg-slate-800 shadow-md origin-top"
+                        role="listbox"
+                    >
+                        <ul className="max-h-60 overflow-auto py-1 outline-none text-sm">
+                            {options.map((option, index) => (
+                                <li
+                                    key={option.value}
+                                    role="option"
+                                    aria-selected={option.value === value}
+                                    onClick={() => handleSelect(option.value)}
+                                    onMouseEnter={() => setFocusedIndex(index)}
+                                    className={`cursor-pointer px-4 py-2 transition-colors ${focusedIndex === index
+                                        ? 'bg-[#F7F4F1] dark:bg-slate-700'
+                                        : 'hover:bg-[#F7F4F1] dark:hover:bg-slate-700'
+                                        } ${option.value === value ? 'font-bold text-primary dark:text-primary' : 'text-slate-700 dark:text-slate-200'}`}
+                                >
+                                    {option.label}
+                                </li>
+                            ))}
+                        </ul>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     );
 }

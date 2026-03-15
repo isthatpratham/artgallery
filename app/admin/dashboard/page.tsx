@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import { AnimatedImage as Image } from '@/components/ui/AnimatedImage';
 import { Dropdown } from '../../../components/ui/Dropdown';
 
 export default function AdminDashboard() {

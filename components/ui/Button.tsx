@@ -1,8 +1,11 @@
+'use client';
+
 import React from 'react';
+import { motion, HTMLMotionProps } from 'framer-motion';
 
 type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'icon' | 'ghost';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends Omit<HTMLMotionProps<"button">, "variant"> {
     variant?: ButtonVariant;
     className?: string;
     icon?: string;
@@ -31,9 +34,15 @@ export function Button({ variant = 'primary', className = '', icon, children, ..
     }
 
     return (
-        <button className={`${baseClasses} ${className}`} {...props}>
+        <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ duration: 0.2 }}
+            className={`${baseClasses} ${className}`}
+            {...props}
+        >
             {children}
             {icon && <span className="material-symbols-outlined">{icon}</span>}
-        </button>
+        </motion.button>
     );
 }

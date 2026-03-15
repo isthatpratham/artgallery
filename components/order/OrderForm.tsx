@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import Image from 'next/image';
+import { AnimatedImage as Image } from '@/components/ui/AnimatedImage';
 import { Button } from '../ui/Button';
 import { Input, Textarea } from '../ui/Input';
 import { Dropdown } from '../ui/Dropdown';

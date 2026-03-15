@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import { AnimatedImage as Image } from '@/components/ui/AnimatedImage';
 import { Button } from '../../components/ui/Button';
 
 export default function OrderSuccess() {

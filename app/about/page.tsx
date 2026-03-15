@@ -1,5 +1,5 @@
 import React from 'react';
-import Image from 'next/image';
+import { AnimatedImage as Image } from '@/components/ui/AnimatedImage';
 import { Navbar } from '../../components/layout/Navbar';
 import { Footer } from '../../components/layout/Footer';
 import { Button } from '../../components/ui/Button';
