@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "../styles/globals.css";
+import { MobileOrderButton } from "@/components/ui/MobileOrderButton";
 
 export const metadata: Metadata = {
     title: "ArtGallery | Bespoke Hand-Painted Portraits",
@@ -25,7 +26,10 @@ export default function RootLayout({
                     rel="stylesheet"
                 />
             </head>
-            <body>{children}</body>
+            <body>
+                {children}
+                <MobileOrderButton />
+            </body>
         </html>
     );
 }
