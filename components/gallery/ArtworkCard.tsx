@@ -13,6 +13,8 @@ interface ArtworkCardProps {
     title: string;
     aspectRatio?: 'aspect-[4/5]' | 'aspect-[1/1]' | 'aspect-[3/4]' | 'aspect-[3/2]';
     onClick?: (e: React.MouseEvent) => void;
+    priority?: boolean;
+    sizes?: string;
 }
 
 export function ArtworkCard({
@@ -22,7 +24,9 @@ export function ArtworkCard({
     category,
     title,
     aspectRatio = 'aspect-[4/5]',
-    onClick
+    onClick,
+    priority = false,
+    sizes = "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
 }: ArtworkCardProps) {
     const content = (
         <div className={`relative overflow-hidden ${aspectRatio}`}>
@@ -30,6 +34,8 @@ export function ArtworkCard({
                 src={imageSrc}
                 alt={imageAlt}
                 fill
+                priority={priority}
+                sizes={sizes}
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 z-10">

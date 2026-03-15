@@ -18,6 +18,8 @@ export default function ArtworkDetail() {
                                 src="/images/gallery/gallery-6.webp"
                                 alt="Main artwork"
                                 fill
+                                priority
+                                sizes="(max-width: 1024px) 100vw, 50vw"
                                 className="object-cover transition-transform duration-500 group-hover:scale-105"
                             />
                         </div>
@@ -29,7 +31,7 @@ export default function ArtworkDetail() {
                                 '/images/gallery/gallery-10.webp'
                             ].map((src, i) => (
                                 <div key={i} className="relative aspect-square rounded-lg border-2 border-transparent hover:border-primary opacity-60 hover:opacity-100 cursor-pointer transition-all overflow-hidden">
-                                    <Image src={src} alt="Thumbnail view" fill className="object-cover" />
+                                    <Image src={src} alt="Thumbnail view" fill sizes="100px" className="object-cover" />
                                 </div>
                             ))}
                         </div>
@@ -118,7 +120,7 @@ export default function ArtworkDetail() {
                         ].map((item) => (
                             <Link href="/artwork/1" key={item.title} className="group cursor-pointer">
                                 <div className="relative aspect-square rounded-xl bg-primary/10 overflow-hidden mb-3">
-                                    <Image src={item.src} alt={item.title} fill className="object-cover transition-transform group-hover:scale-110" />
+                                    <Image src={item.src} alt={item.title} fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover transition-transform group-hover:scale-110" />
                                 </div>
                                 <h4 className="font-bold text-sm">{item.title}</h4>
                                 <p className="text-primary text-xs font-bold">$850.00</p>

@@ -49,7 +49,7 @@ export default function Gallery() {
                 </section>
 
                 <GalleryGrid>
-                    {artworks.map((art) => (
+                    {artworks.map((art, idx) => (
                         <ArtworkCard
                             key={art.id}
                             id={art.id}
@@ -58,6 +58,8 @@ export default function Gallery() {
                             category={art.category}
                             title={art.title}
                             aspectRatio={art.aspectRatio}
+                            priority={idx < 4}
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         />
                     ))}
                 </GalleryGrid>
