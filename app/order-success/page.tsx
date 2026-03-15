@@ -1,9 +1,51 @@
-import React from 'react';
+'use client';
+import React, { Suspense } from 'react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import { AnimatedImage as Image } from '@/components/ui/AnimatedImage';
 import { Button } from '../../components/ui/Button';
 
-export default function OrderSuccess() {
+function OrderSuccessContent() {
+    const searchParams = useSearchParams();
+    const orderId = searchParams.get("orderId");
+    const name = searchParams.get("name") || "Valued Customer";
+    const productType = searchParams.get("productType") || "Custom Art";
+    const size = searchParams.get("size");
+    const portraitType = searchParams.get("portraitType");
+    const keychainShape = searchParams.get("keychainShape");
+
+    const displaySize = productType === 'Portrait' ? size : keychainShape;
+
+    const handleWhatsAppConfirm = () => {
+        const phone = "917099311104";
+        const message = `Hello! I have just placed a new order on ArtGallery.
+
+Order ID: ${orderId}
+Customer Name: ${name}
+Product Type: ${productType}
+Size / Shape: ${displaySize}
+
+I have uploaded the reference image through the website.
+
+Please confirm the order and share the next steps.
+
+Thank you!`;
+
+        const encodedMessage = encodeURIComponent(message);
+        const whatsappUrl = `https://wa.me/${phone}?text=${encodedMessage}`;
+        window.open(whatsappUrl, "_blank");
+    };
+
+    if (!orderId) {
+        return (
+            <div className="flex min-h-screen items-center justify-center">
+                <div className="text-center p-8 bg-white dark:bg-slate-800 rounded-2xl shadow-xl">
+                    <h1 className="text-2xl font-bold mb-4">No Order Found</h1>
+                    <Link href="/order" className="text-primary hover:underline">Return to Order Page</Link>
+                </div>
+            </div>
+        );
+    }
     return (
         <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden">
             {/* Navigation Header */}
@@ -41,7 +83,7 @@ export default function OrderSuccess() {
                         <div className="flex flex-col gap-4">
                             <div className="flex justify-between items-center pb-4 border-b border-primary/5">
                                 <span className="text-slate-500 dark:text-slate-400 font-medium">Order Number</span>
-                                <span className="text-slate-900 dark:text-slate-100 font-bold font-mono">#AG-88291</span>
+                                <span className="text-slate-900 dark:text-slate-100 font-bold font-mono">#{orderId}</span>
                             </div>
                             {/* Placeholder for ordered item preview */}
                             <div className="flex items-center gap-4 py-2">
@@ -49,8 +91,8 @@ export default function OrderSuccess() {
                                     <Image src="/images/gallery/gallery-11.webp" alt="Ordered Item Thumbnail" fill className="object-cover" />
                                 </div>
                                 <div className="flex flex-col">
-                                    <span className="text-slate-900 dark:text-slate-100 font-semibold">Ethereal Horizons</span>
-                                    <span className="text-slate-500 dark:text-slate-400 text-sm">Original Canvas, 24x36"</span>
+                                    <span className="text-slate-900 dark:text-slate-100 font-semibold">{productType} {portraitType ? `(${portraitType})` : ''}</span>
+                                    <span className="text-slate-500 dark:text-slate-400 text-sm">Custom {productType}, {displaySize}</span>
                                 </div>
                             </div>
                         </div>
@@ -58,7 +100,12 @@ export default function OrderSuccess() {
 
                     {/* Action Buttons */}
                     <div className="flex flex-col gap-3">
-                        <Button variant="primary" className="w-full h-14" icon="chat">
+                        <Button
+                            variant="primary"
+                            className="w-full h-14"
+                            icon="chat"
+                            onClick={handleWhatsAppConfirm}
+                        >
                             Confirm Order on WhatsApp
                         </Button>
                         <Link href="/gallery" className="flex items-center justify-center w-full h-12 bg-transparent text-primary hover:bg-primary/5 rounded-xl font-semibold transition-colors">
@@ -84,5 +131,17 @@ export default function OrderSuccess() {
                 </div>
             </footer>
         </div>
+    );
+}
+
+export default function OrderSuccess() {
+    return (
+        <Suspense fallback={
+            <div className="flex min-h-screen items-center justify-center">
+                <div className="animate-pulse text-primary font-bold">Loading Order Details...</div>
+            </div>
+        }>
+            <OrderSuccessContent />
+        </Suspense>
     );
 }

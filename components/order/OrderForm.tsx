@@ -1,17 +1,122 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { AnimatedImage as Image } from '@/components/ui/AnimatedImage';
 import { Button } from '../ui/Button';
 import { Input, Textarea } from '../ui/Input';
 import { Dropdown } from '../ui/Dropdown';
+import { supabase } from "@/lib/supabaseClient"
+import { useRouter } from "next/navigation"
 
 export function OrderForm() {
+    const router = useRouter()
+    const fileInputRef = useRef<HTMLInputElement>(null);
+
     const [productType, setProductType] = useState('Portrait');
     const [portraitType, setPortraitType] = useState('Solo');
     const [size, setSize] = useState('4x6');
     const [keychainShape, setKeychainShape] = useState('Circle');
+
+    const [name, setName] = useState('');
+    const [phone, setPhone] = useState('');
+    const [address, setAddress] = useState('');
+    const [notes, setNotes] = useState('');
+    const [referenceFile, setReferenceFile] = useState<File | null>(null);
+    const [imagePreview, setImagePreview] = useState<string | null>(null);
+    const [loading, setLoading] = useState(false);
+
+    function generateOrderId() {
+        const random = Math.floor(100000 + Math.random() * 900000)
+        return `AG-${random}`
+    }
+
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file) {
+            setReferenceFile(file);
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setImagePreview(reader.result as string);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+
+        // 1. Validation
+        if (!referenceFile || !productType || !name || !phone || !address) {
+            alert("Please fill all required fields.");
+            return;
+        }
+
+        setLoading(true);
+
+        try {
+            const orderId = generateOrderId();
+            const cleanName = name.replace(/\s+/g, "").toLowerCase();
+            const fileExt = referenceFile.name.split('.').pop();
+            const filename = `${cleanName}_${orderId}.${fileExt}`;
+
+            // 2. Upload image to Supabase Storage
+            const { data: uploadData, error: uploadError } = await supabase.storage
+                .from("order-images")
+                .upload(filename, referenceFile, {
+                    cacheControl: "3600",
+                    upsert: false
+                });
+
+            if (uploadError) {
+                throw new Error(uploadError.message);
+            }
+
+            // 3. Retrieve public image URL
+            const { data: publicData } = supabase.storage
+                .from("order-images")
+                .getPublicUrl(filename);
+
+            const imageUrl = publicData.publicUrl;
+
+            // 4. Insert order into database
+            const { error: insertError } = await supabase
+                .from("orders")
+                .insert({
+                    order_number: orderId,
+                    customer_name: name,
+                    phone: phone,
+                    address: address,
+                    product_type: productType,
+                    portrait_type: portraitType,
+                    size: size,
+                    keychain_shape: keychainShape,
+                    notes: notes,
+                    reference_image: imageUrl,
+                    status: "Pending"
+                });
+
+            if (insertError) {
+                throw new Error(insertError.message);
+            }
+
+            router.push(`/order-success?orderId=${orderId}&name=${encodeURIComponent(name)}&productType=${encodeURIComponent(productType)}&size=${encodeURIComponent(size)}&portraitType=${encodeURIComponent(portraitType)}&keychainShape=${encodeURIComponent(keychainShape)}`);
+        } catch (error: any) {
+            console.error("Order submission failed:", error);
+            alert("Something went wrong while submitting the order.");
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return (
-        <form className="flex flex-col gap-8" onSubmit={(e) => e.preventDefault()}>
+        <form className="flex flex-col gap-8" onSubmit={handleSubmit}>
+            {/* Hidden file input */}
+            <input
+                type="file"
+                ref={fileInputRef}
+                onChange={handleFileChange}
+                className="hidden"
+                accept="image/*"
+            />
             {/* Reference Photo Upload Section */}
             <div className="flex flex-col gap-4 bg-white dark:bg-slate-800/50 p-6 rounded-xl border border-primary/10 shadow-sm">
                 <h2 className="text-slate-900 dark:text-slate-100 text-lg font-bold flex items-center gap-2">
@@ -19,16 +124,31 @@ export function OrderForm() {
                     Reference Photo
                 </h2>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div className="aspect-square bg-primary/5 rounded-xl border-2 border-dashed border-primary/20 flex flex-col items-center justify-center gap-2 hover:bg-primary/10 transition-colors cursor-pointer">
+                    <div
+                        onClick={() => fileInputRef.current?.click()}
+                        className="aspect-square bg-primary/5 rounded-xl border-2 border-dashed border-primary/20 flex flex-col items-center justify-center gap-2 hover:bg-primary/10 transition-colors cursor-pointer"
+                    >
                         <span className="material-symbols-outlined text-primary text-3xl">add_a_photo</span>
                         <span className="text-xs font-semibold text-primary">Add Photo</span>
                     </div>
-                    <div className="relative aspect-square bg-slate-100 dark:bg-slate-700 rounded-xl overflow-hidden">
-                        <Image src="/images/studio/studio-9.webp" alt="Reference Photo Placeholder" fill className="object-cover" />
-                    </div>
+                    {imagePreview ? (
+                        <div className="relative aspect-square bg-slate-100 dark:bg-slate-700 rounded-xl overflow-hidden">
+                            <Image src={imagePreview} alt="Reference Photo" fill className="object-cover" />
+                        </div>
+                    ) : (
+                        <div className="relative aspect-square bg-slate-100 dark:bg-slate-700 rounded-xl overflow-hidden">
+                            <Image src="/images/studio/studio-9.webp" alt="Reference Photo Placeholder" fill className="object-cover" />
+                        </div>
+                    )}
                 </div>
                 <div className="flex justify-start">
-                    <Button variant="primary" type="button" icon="upload" className="h-10 px-4 py-0 text-sm shadow-lg shadow-primary/20">
+                    <Button
+                        variant="primary"
+                        type="button"
+                        icon="upload"
+                        className="h-10 px-4 py-0 text-sm shadow-lg shadow-primary/20"
+                        onClick={() => fileInputRef.current?.click()}
+                    >
                         Upload New Photo
                     </Button>
                 </div>
@@ -98,27 +218,52 @@ export function OrderForm() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="flex flex-col gap-2">
                         <label className="text-sm font-medium text-slate-600 dark:text-slate-400">Full Name</label>
-                        <Input type="text" placeholder="John Doe" />
+                        <Input
+                            type="text"
+                            placeholder="John Doe"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
                     </div>
                     <div className="flex flex-col gap-2">
                         <label className="text-sm font-medium text-slate-600 dark:text-slate-400">Phone Number</label>
-                        <Input type="tel" placeholder="+1 (555) 000-0000" />
+                        <Input
+                            type="tel"
+                            placeholder="+1 (555) 000-0000"
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
+                        />
                     </div>
                 </div>
                 <div className="flex flex-col gap-2">
                     <label className="text-sm font-medium text-slate-600 dark:text-slate-400">Shipping Address</label>
-                    <Textarea rows={3} placeholder="123 Art Street, Creativity City..." />
+                    <Textarea
+                        rows={3}
+                        placeholder="123 Art Street, Creativity City..."
+                        value={address}
+                        onChange={(e) => setAddress(e.target.value)}
+                    />
                 </div>
                 <div className="flex flex-col gap-2">
                     <label className="text-sm font-medium text-slate-600 dark:text-slate-400">Notes / Special Requests</label>
-                    <Textarea rows={4} placeholder="Mention any specific color preferences or details..." />
+                    <Textarea
+                        rows={4}
+                        placeholder="Mention any specific color preferences or details..."
+                        value={notes}
+                        onChange={(e) => setNotes(e.target.value)}
+                    />
                 </div>
             </div>
 
             {/* Submit Section */}
             <div className="flex flex-col items-center gap-4 mt-4 pb-20">
-                <Button variant="primary" type="submit" className="w-full max-w-md h-14 text-lg shadow-xl shadow-primary/30">
-                    Submit Order
+                <Button
+                    variant="primary"
+                    type="submit"
+                    className="w-full max-w-md h-14 text-lg shadow-xl shadow-primary/30"
+                    disabled={loading}
+                >
+                    {loading ? "Processing..." : "Submit Order"}
                 </Button>
                 <p className="text-xs text-slate-400 text-center px-4">
                     By submitting, you agree to our terms of service regarding custom handmade commissions. Prices vary based on complexity.
