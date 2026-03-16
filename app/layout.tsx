@@ -5,6 +5,9 @@ import { MobileOrderButton } from "@/components/ui/MobileOrderButton";
 export const metadata: Metadata = {
     title: "ArtGallery | Bespoke Hand-Painted Portraits",
     description: "Experience the magic of bespoke hand-painted portraits and custom accessories crafted by master artists.",
+    icons: {
+        icon: "/icon.png"
+    }
 };
 
 export default function RootLayout({
