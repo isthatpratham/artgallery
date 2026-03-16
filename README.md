@@ -33,6 +33,53 @@ ArtGallery serves as a bridge between master artists and clients. Clients can up
 
 ---
 
+## Application Screenshots
+
+### Main Landing Page
+![Main Page](screenshots/mainpage.png)
+
+---
+
+### Gallery Page
+![Gallery Page](screenshots/gallerypage.png)
+
+---
+
+### Order Page
+![Order Page](screenshots/orderpage.png)
+
+---
+
+### Contact Page
+![Contact Page](screenshots/contactpage.png)
+
+---
+
+### About Page
+![About Page](screenshots/aboutpage.png)
+
+---
+
+### Admin Login
+![Admin Login](screenshots/adminlogin.png)
+
+---
+
+### Admin Dashboard
+![Admin Dashboard](screenshots/admindashboard.png)
+
+---
+
+### Admin Orders Panel
+![Admin Orders](screenshots/adminorder.png)
+
+---
+
+### Admin Settings
+![Admin Settings](screenshots/adminsettings.png)
+
+---
+
 ## Tech Stack
 
 ### Frontend
