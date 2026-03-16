@@ -32,11 +32,49 @@ export default function AdminDashboard() {
         fetchOrders();
     }, []);
 
+    // STEP 2 — Add Status Update Function
+    async function updateStatus(newStatus: string) {
+        if (!selectedOrder) return;
+
+        try {
+            const res = await fetch("/api/admin/update-order-status", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    orderId: selectedOrder.id,
+                    status: newStatus
+                })
+            });
+
+            const result = await res.json();
+
+            if (result.success) {
+                setSelectedOrder({
+                    ...selectedOrder,
+                    status: newStatus
+                });
+
+                setOrders((prev) =>
+                    prev.map((order) =>
+                        order.id === selectedOrder.id
+                            ? { ...order, status: newStatus }
+                            : order
+                    )
+                );
+            }
+        } catch (error) {
+            console.error("Status update failed:", error);
+        }
+    }
+
     return (
         <OrdersDashboardClient
             initialOrders={orders}
             selectedOrder={selectedOrder}
             setSelectedOrder={setSelectedOrder}
+            onUpdateStatus={updateStatus}
         />
     );
 }

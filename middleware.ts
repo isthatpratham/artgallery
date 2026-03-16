@@ -73,7 +73,7 @@ export async function middleware(request: NextRequest) {
     const { data: adminUser, error } = await supabase
         .from('admin_users')
         .select('*')
-        .eq('id', session.user.id)
+        .eq('user_id', session.user.id)
         .single()
 
     // 3. If the user is NOT in the admin_users table

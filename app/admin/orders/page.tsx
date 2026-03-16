@@ -7,6 +7,36 @@ export default function AdminOrdersPage() {
     const [orders, setOrders] = useState([]);
 
     // STEP 2 - Fix API Fetch Logic
+    // STEP 4 - Status Update Function
+    async function updateStatus(orderId: string, newStatus: string) {
+        try {
+            const res = await fetch("/api/admin/update-order-status", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    orderId,
+                    status: newStatus
+                })
+            });
+
+            const result = await res.json();
+
+            if (result.success) {
+                setOrders((prev: any) =>
+                    prev.map((order: any) =>
+                        order.id === orderId
+                            ? { ...order, status: newStatus }
+                            : order
+                    )
+                );
+            }
+        } catch (error) {
+            console.error("Status update failed:", error);
+        }
+    }
+
     useEffect(() => {
         async function fetchOrders() {
             try {
@@ -60,6 +90,7 @@ export default function AdminOrdersPage() {
                                     <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase">Size/Shape</th>
                                     <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase">Status</th>
                                     <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase">Date</th>
+                                    <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase text-right">Actions</th>
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-primary/5">
@@ -78,6 +109,15 @@ export default function AdminOrdersPage() {
                                             </td>
                                             <td className="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">
                                                 {new Date(order.created_at).toLocaleDateString()}
+                                            </td>
+                                            <td className="px-6 py-4 text-right">
+                                                <button
+                                                    onClick={() => updateStatus(order.id, "In Progress")}
+                                                    disabled={order.status === "In Progress"}
+                                                    className="text-xs bg-primary/10 text-primary px-3 py-1 rounded-lg font-bold hover:bg-primary hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                                >
+                                                    Set In Progress
+                                                </button>
                                             </td>
                                         </tr>
                                     ))

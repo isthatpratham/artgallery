@@ -45,7 +45,7 @@ export default function AdminLogin() {
             const { data: admin, error: adminError } = await supabase
                 .from('admin_users')
                 .select('*')
-                .eq('id', user.id)
+                .eq('user_id', user.id)
                 .single();
 
             console.log("ADMIN RESULT:", admin);

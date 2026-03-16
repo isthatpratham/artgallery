@@ -24,12 +24,14 @@ interface OrdersDashboardClientProps {
     initialOrders: Order[];
     selectedOrder: Order | null;
     setSelectedOrder: (order: Order | null) => void;
+    onUpdateStatus: (newStatus: string) => void;
 }
 
 export function OrdersDashboardClient({
     initialOrders,
     selectedOrder,
-    setSelectedOrder
+    setSelectedOrder,
+    onUpdateStatus
 }: OrdersDashboardClientProps) {
     const [filter, setFilter] = useState('All Orders');
     const [searchQuery, setSearchQuery] = useState('');
@@ -170,7 +172,18 @@ export function OrdersDashboardClient({
                             <>
                                 <div className="space-y-4">
                                     <div className="aspect-square w-full rounded-xl overflow-hidden border border-primary/10 relative group">
-                                        <Image src={currentOrder.reference_image || "/images/gallery/gallery-2.jpg"} alt="Order Detail Reference" fill className="object-cover" />
+                                        {currentOrder.reference_image && (
+                                            <img
+                                                src={currentOrder.reference_image}
+                                                alt="Reference Image"
+                                                style={{
+                                                    width: "100%",
+                                                    height: "100%",
+                                                    objectFit: "cover",
+                                                    borderRadius: "12px"
+                                                }}
+                                            />
+                                        )}
                                         <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                                             <a
                                                 href={currentOrder.reference_image}
@@ -185,7 +198,7 @@ export function OrdersDashboardClient({
                                     </div>
                                     <div className="flex items-center justify-between">
                                         <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Reference Photo</span>
-                                        <span className="text-[10px] text-slate-400 truncate max-w-[150px]">{currentOrder.order_number}_ref.jpg</span>
+                                        <span className="text-[10px] text-slate-400 truncate max-w-[150px]">From Supabase Storage</span>
                                     </div>
                                 </div>
 
@@ -248,7 +261,12 @@ export function OrdersDashboardClient({
                                     )}
 
                                     <div className="flex gap-2 pt-4 border-t border-primary/10">
-                                        <button className="flex-1 bg-primary text-white py-3 rounded-xl font-bold text-sm shadow-md shadow-primary/20 hover:scale-[1.02] transition-transform">Update Status</button>
+                                        <button
+                                            onClick={() => onUpdateStatus("In Progress")}
+                                            className="flex-1 bg-primary text-white py-3 rounded-xl font-bold text-sm shadow-md shadow-primary/20 hover:scale-[1.02] transition-transform"
+                                        >
+                                            Update Status
+                                        </button>
                                         <a
                                             href={`tel:${currentOrder.phone}`}
                                             className="px-4 bg-primary/10 text-primary py-3 rounded-xl font-bold text-sm hover:bg-primary/20 transition-colors flex items-center justify-center"
