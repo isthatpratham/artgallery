@@ -10,31 +10,68 @@
 
 @layer utilities {
   .no-scrollbar::-webkit-scrollbar {
-      display: none;
+    display: none;
   }
+
   .no-scrollbar {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
+
   .fill-1 {
-      font-variation-settings: 'FILL' 1;
+    font-variation-settings: 'FILL' 1;
   }
 
   /* Masonry Grid */
   .masonry-grid {
-      column-count: 1;
-      column-gap: 1.5rem;
+    column-count: 1;
+    column-gap: 1.5rem;
   }
-  @media (min-width: 640px) { .masonry-grid { column-count: 2; } }
-  @media (min-width: 1024px) { .masonry-grid { column-count: 3; } }
-  @media (min-width: 1280px) { .masonry-grid { column-count: 4; } }
-  
+
+  @media (min-width: 640px) {
+    .masonry-grid {
+      column-count: 2;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .masonry-grid {
+      column-count: 3;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .masonry-grid {
+      column-count: 4;
+    }
+  }
+
   .masonry-item {
-      break-inside: avoid;
-      margin-bottom: 1.5rem;
+    break-inside: avoid;
+    margin-bottom: 1.5rem;
   }
-  
+
   .artwork-card:hover img {
-      transform: scale(1.05);
+    transform: scale(1.05);
+  }
+
+  /* reCAPTCHA Styling */
+  .captcha-wrapper {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .captcha-title {
+    font-size: 14px;
+    margin-bottom: 12px;
+    color: #bbb;
+  }
+
+  .captcha-box {
+    display: flex;
+    justify-content: center;
   }
 }

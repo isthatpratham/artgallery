@@ -6,6 +6,7 @@ import { Input, Textarea } from '../ui/Input';
 import { Dropdown } from '../ui/Dropdown';
 import { supabase } from "@/lib/supabaseClient"
 import { useRouter } from "next/navigation"
+import ReCAPTCHA from "react-google-recaptcha"
 
 export function OrderForm() {
     const router = useRouter()
@@ -23,6 +24,13 @@ export function OrderForm() {
     const [referenceFile, setReferenceFile] = useState<File | null>(null);
     const [imagePreview, setImagePreview] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
+    const [captchaVerified, setCaptchaVerified] = useState(false);
+    const [website, setWebsite] = useState("");
+
+    function validatePhone(phone: string) {
+        const regex = /^[6-9]\d{9}$/;
+        return regex.test(phone);
+    }
 
     function generateOrderId() {
         const random = Math.floor(100000 + Math.random() * 900000)
@@ -44,9 +52,25 @@ export function OrderForm() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
+        // 0. Honeypot check
+        if (website !== "") {
+            console.warn("Bot detected.");
+            return;
+        }
+
         // 1. Validation
         if (!referenceFile || !productType || !name || !phone || !address) {
             alert("Please fill all required fields.");
+            return;
+        }
+
+        if (!captchaVerified) {
+            alert("Please verify that you are not a robot.");
+            return;
+        }
+
+        if (!validatePhone(phone)) {
+            alert("Please enter a valid 10-digit Indian mobile number starting with 6-9.");
             return;
         }
 
@@ -109,6 +133,14 @@ export function OrderForm() {
 
     return (
         <form className="flex flex-col gap-8" onSubmit={handleSubmit}>
+            {/* Honeypot field */}
+            <input
+                type="text"
+                name="website"
+                style={{ display: "none" }}
+                value={website}
+                onChange={(e) => setWebsite(e.target.value)}
+            />
             {/* Hidden file input */}
             <input
                 type="file"
@@ -229,9 +261,14 @@ export function OrderForm() {
                         <label className="text-sm font-medium text-slate-600 dark:text-slate-400">Phone Number</label>
                         <Input
                             type="tel"
-                            placeholder="+1 (555) 000-0000"
+                            placeholder="10-digit mobile number"
                             value={phone}
-                            onChange={(e) => setPhone(e.target.value)}
+                            maxLength={10}
+                            pattern="[6-9]{1}[0-9]{9}"
+                            onChange={(e) => {
+                                const val = e.target.value.replace(/\D/g, "");
+                                setPhone(val);
+                            }}
                         />
                     </div>
                 </div>
@@ -257,6 +294,15 @@ export function OrderForm() {
 
             {/* Submit Section */}
             <div className="flex flex-col items-center gap-4 mt-4 pb-20">
+                <div className="captcha-wrapper">
+                    <p className="captcha-title">Verify you're human</p>
+                    <div className="captcha-box">
+                        <ReCAPTCHA
+                            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+                            onChange={() => setCaptchaVerified(true)}
+                        />
+                    </div>
+                </div>
                 <Button
                     variant="primary"
                     type="submit"
