@@ -10,7 +10,7 @@
 .env
 .env.*
 
-# testing
+# testings
 /coverage
 
 # next.js
